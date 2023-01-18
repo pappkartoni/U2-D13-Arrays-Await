@@ -45,7 +45,7 @@ const addToCart = (btn) => {
         cart.innerHTML = "";
     }
 
-    if (isInCart(bookToAdd)) {
+    if (isNotInCart(bookToAdd)) {
         cart.innerHTML += `<div class="col col-md-4 mb-3">
                             <div class="card mb-4 shadow-sm" data-asin="${bookToAdd.asin}">
                                 <div class="row no-gutters">
@@ -124,7 +124,7 @@ const updateCartCounter = () => {
     counter.innerText = document.querySelectorAll("#cart-row .card").length
 }
 
-const isInCart = (book) => {
+const isNotInCart = (book) => {
     const cart = document.getElementById("cart-row");
     return cart.querySelector(`.card[data-asin="${book.asin}"]`) === null;
     
