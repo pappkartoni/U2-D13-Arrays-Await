@@ -7,37 +7,75 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <title>D13 Bookstore</title>
+        <style>
+            body {
+                background-color: antiquewhite;
+            }
+            .jumbotron {
+                background-image: url("./img/jumbo.jpg");
+                -webkit-background-size: 100% 100%;
+                -moz-background-size: 100% 100%;
+                -o-background-size: 100% 100%;
+                background-size: 100% 100%;
+                min-height: 360px;
+                background-size: cover;
+                background-position: center;
+                border-radius: 0;
+            }
+            #cart {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+            .container-fluid {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        </style>
     </head>
     <body>
-        <nav class="navbar navbar-light bg-light sticky-top" style="height: 60px">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <img src="nav-logo.png" width="30px">
-                </a>
-                <div class="form-inline mr-auto">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onkeyup="searchForBooks(event)">
+        <div class="container-fluid sticky-top">
+            <nav class="navbar navbar-light bg-light sticky-top" style="height: 60px">
+                <div class="container">
+                    <a class="navbar-brand" href="#">
+                        <img src="./img/nav-logo.png" width="30px">
+                    </a>
+                    <div class="form-inline mr-auto">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onkeyup="searchForBooks(event)">
+                    </div>
+                    <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#cart">Cart</button>
                 </div>
-                <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#cart">Cart</button>
-            </div>
-        </nav>
-        <div class="container collapse sticky-top bg-light p-3" id="cart" style="top: 60px; right: 0">
-            <h2>Shopping Cart</h2>
-            <div class="row" id="cart-row">
-                <div class="col-4 offset-4" id="cart-filler">
-                    <p>
-                        There is nothing in your shopping cart at the moment.
+            </nav>
+            <div class="container collapse bg-light p-3" id="cart">
+                <h3>Shopping Cart</h3>
+                <div class="row" id="cart-row">
+                    <div class="col-4 offset-4" id="cart-filler">
+                        <p>
+                            There is nothing in your shopping cart at the moment.
+                        </p>
+                    </div>
+                </div>
+                <div class="row align-items-center px-2">
+                    <button class="btn btn-outline-warning mr-auto" onclick="removeAllFromCart()">Empty Cart</button>
+                    <p class="text-info m-0" id="count">
+                        <small>0</small> item(s)
                     </p>
                 </div>
             </div>
-            <div class="row align-items-center px-2">
-                <button class="btn btn-outline-warning mr-auto" onclick="removeAllFromCart()">Empty Cart</button>
-                <p class="text-info m-0" id="count">
-                    <small>0</small> item(s)
-                </p>
+        </div>
+        <div class="jumbotron py-5 text-white" id="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="display-1">Welcome to my Bookstore</h1>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="container">
-            <h1>Our Shop</h1>
+            <h2>Our Shop</h2>
             <div class="row" id="shop"></div>
         </div>
         <script src="script.js"></script>

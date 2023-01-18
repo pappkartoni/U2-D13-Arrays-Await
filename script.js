@@ -1,5 +1,6 @@
 const url = "https://striveschool-api.herokuapp.com/books"
 const allBooks = [];
+
 const getBooks = async () => {
     try {
         return await (await fetch(url)).json();
