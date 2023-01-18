@@ -1,4 +1,6 @@
 ## TODOs
 
-- Create a Jumbotron of some kind
-- Handle duplicates in shop
+1. Handle duplicates in shop
+    - Remove current alert when already in cart
+    - Add item counter of some kind
+    - Increase/decrease counter when adding removing items

@@ -36,6 +36,7 @@ const createCard = (book) => { //{"asin":"1940026091","title":"Pandemic (The Ext
                 </div>
             </div>`
 }
+
 const addToCart = (btn) => {
     btn.closest(".card").classList.add("border", "border-success");
     let bookToAdd = findBookById(btn.closest(".card").dataset.asin)
@@ -43,29 +44,34 @@ const addToCart = (btn) => {
     if (cart.querySelector("#cart-filler")) {
         cart.innerHTML = "";
     }
-    cart.innerHTML += `<div class="col col-md-4 mb-3">
-                        <div class="card mb-4 shadow-sm" data-asin="${bookToAdd.asin}">
-                            <div class="row no-gutters">
-                                <div class="col-4">
-                                    <img class="card-img-top img-fluid h-100" src="${bookToAdd.img}">
-                                </div>
-                                <div class="col-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${bookToAdd.title}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">${bookToAdd.category}</h6>
-                                        <p class="card-text">
-                                            Price: ${bookToAdd.price}€
-                                        </p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="removeFromCart(this)">Remove</button>
-                                            <small class="text-muted">ASIN: ${bookToAdd.asin}</small>
+
+    if (isInCard(bookToAdd)) {
+        cart.innerHTML += `<div class="col col-md-4 mb-3">
+                            <div class="card mb-4 shadow-sm" data-asin="${bookToAdd.asin}">
+                                <div class="row no-gutters">
+                                    <div class="col-4">
+                                        <img class="card-img-top img-fluid h-100" src="${bookToAdd.img}">
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${bookToAdd.title}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">${bookToAdd.category}</h6>
+                                            <p class="card-text">
+                                                Price: ${bookToAdd.price}€
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="removeFromCart(this)">Remove</button>
+                                                <small class="text-muted">ASIN: ${bookToAdd.asin}</small>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>`;
-    updateCartCounter()
+                        </div>`;
+        updateCartCounter()
+    } else {
+        alert("Already in cart")
+    }
 }
 
 const hideBook = (btn) => {
@@ -88,7 +94,7 @@ const removeAllFromCart = () => {
 }
 
 const searchForBooks = (event) => {
-    let input = event.target.value;
+    const input = event.target.value;
     if (input.length > 2) {
         renderBooks(findBooksByTitle(input));
     } else if (input.length === 0) {
@@ -116,6 +122,12 @@ const findBooksByTitle = (str) => {
 const updateCartCounter = () => {
     let counter = document.querySelector("#count > small");
     counter.innerText = document.querySelectorAll("#cart-row .card").length
+}
+
+const isInCard = (book) => {
+    const cart = document.getElementById("cart-row");
+    return cart.querySelector(`.card[data-asin="${book.asin}"]`) === null;
+    
 }
 
 window.onload = async () => {
